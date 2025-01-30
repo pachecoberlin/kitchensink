@@ -34,6 +34,8 @@ import android.os.Handler;
 import android.util.Log;
 import android.util.Pair;
 import android.view.View;
+import android.view.WindowInsets;
+import android.view.WindowInsetsController;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -210,7 +212,18 @@ public class KitchenSink2Activity extends FragmentActivity implements KitchenSin
         mSharedPreferences = getSharedPreferences(PREFERENCES_NAME, MODE_PRIVATE);
 
         setContentView(R.layout.activity_2pane);
-
+//        // Vollbildmodus aktivieren
+//        getWindow().getDecorView().setSystemUiVisibility(
+//                View.SYSTEM_UI_FLAG_FULLSCREEN |
+//                        View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
+//                        View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+//        );
+        WindowInsetsController controller = getWindow().getInsetsController();
+        if (controller != null) {
+            controller.hide(WindowInsets.Type.statusBars() | WindowInsets.Type.navigationBars());
+            controller.setSystemBarsBehavior(
+                    WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE);
+        }
         mKsHelperImpl.initCarApiIfAutomotive(this);
 
         mRV = findViewById(R.id.list_pane);
@@ -406,6 +419,8 @@ public class KitchenSink2Activity extends FragmentActivity implements KitchenSin
 //                    AudioUserAssignmentFragment.class),
 //            new Pair<>(AudioMirrorTestFragment.FRAGMENT_NAME,
 //                    AudioMirrorTestFragment.class),
+//            new Pair<>("Start app for display and user",
+//                    ProfileUserFragment.class),
             new Pair<>("Display Input Lock", DisplayInputLockTestFragment.class),
             new Pair<>("Mirror & Control", DisplayMirroringFragment.class),
             new Pair<>("Serving & Link Sharing", MultidisplayMediaFragment.class)

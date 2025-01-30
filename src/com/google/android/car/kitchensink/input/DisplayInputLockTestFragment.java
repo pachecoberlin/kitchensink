@@ -65,30 +65,30 @@ public final class DisplayInputLockTestFragment extends Fragment {
 
     private final DisplayManager.DisplayListener mDisplayListener =
             new DisplayManager.DisplayListener() {
-        @Override
-        public void onDisplayAdded(int displayId) {
-            if (DEBUG) {
-                Log.d(TAG, "onDisplayAdded: display " + displayId);
-            }
-            Display display = mDisplayManager.getDisplay(displayId);
-            mDisplayInputLockItems.add(new DisplayInputLockItem(displayId,
-                        mDisplayInputLockSetting.contains(display.getUniqueId())));
-            mDisplayInputLockListAdapter.setListItems(mDisplayInputLockItems);
-        }
+                @Override
+                public void onDisplayAdded(int displayId) {
+                    if (DEBUG) {
+                        Log.d(TAG, "onDisplayAdded: display " + displayId);
+                    }
+                    Display display = mDisplayManager.getDisplay(displayId);
+                    mDisplayInputLockItems.add(new DisplayInputLockItem(displayId,
+                            mDisplayInputLockSetting.contains(display.getUniqueId())));
+                    mDisplayInputLockListAdapter.setListItems(mDisplayInputLockItems);
+                }
 
-        @Override
-        public void onDisplayRemoved(int displayId) {
-            if (DEBUG) {
-                Log.d(TAG, "onDisplayRemoved: display " + displayId);
-            }
-            mDisplayInputLockItems.removeIf(item -> item.mDisplayId == displayId);
-            mDisplayInputLockListAdapter.setListItems(mDisplayInputLockItems);
-        }
+                @Override
+                public void onDisplayRemoved(int displayId) {
+                    if (DEBUG) {
+                        Log.d(TAG, "onDisplayRemoved: display " + displayId);
+                    }
+                    mDisplayInputLockItems.removeIf(item -> item.mDisplayId == displayId);
+                    mDisplayInputLockListAdapter.setListItems(mDisplayInputLockItems);
+                }
 
-        @Override
-        public void onDisplayChanged(int displayId) {
-        }
-    };
+                @Override
+                public void onDisplayChanged(int displayId) {
+                }
+            };
 
     static class DisplayInputLockItem {
         public final int mDisplayId;
@@ -116,6 +116,7 @@ public final class DisplayInputLockTestFragment extends Fragment {
 
         ListView inputLockListView = view.findViewById(R.id.display_input_lock_list);
         initDisplayInputLockData();
+//        mDisplayInputLockItems.removeIf(item -> item.mDisplayId == getContext().getDisplayId());
         mDisplayInputLockListAdapter = new DisplayInputLockListAdapter(getContext(),
                 mDisplayInputLockItems, this);
         inputLockListView.setAdapter(mDisplayInputLockListAdapter);
@@ -142,7 +143,7 @@ public final class DisplayInputLockTestFragment extends Fragment {
      * Requests update to the display input lock setting value.
      *
      * @param displayId The display for which the input lock is updated.
-     * @param enabled Whether to enable the display input lock.
+     * @param enabled   Whether to enable the display input lock.
      */
     public void requestUpdateDisplayInputLockSetting(int displayId, boolean enabled) {
         String displayUniqueId = getDisplayUniqueId(displayId);
@@ -236,15 +237,17 @@ public final class DisplayInputLockTestFragment extends Fragment {
         mDisplayInputLockItems.clear();
         for (CarOccupantZoneManager.OccupantZoneInfo zone : zonelist) {
             if (zone.occupantType == OCCUPANT_TYPE_DRIVER) {
-                continue;
+//                continue;
             }
 
             Display display = mOccupantZoneManager.getDisplayForOccupant(zone,
                     CarOccupantZoneManager.DISPLAY_TYPE_MAIN);
             if (display != null) {
                 int displayId = display.getDisplayId();
-                mDisplayInputLockItems.add(new DisplayInputLockItem(displayId,
-                        mDisplayInputLockSetting.contains(display.getUniqueId())));
+                if (displayId != getContext().getDisplayId()) {
+                    mDisplayInputLockItems.add(new DisplayInputLockItem(displayId,
+                            mDisplayInputLockSetting.contains(display.getUniqueId())));
+                }
             }
         }
     }
@@ -266,7 +269,7 @@ public final class DisplayInputLockTestFragment extends Fragment {
         // Update input lock items from the setting value.
         for (DisplayInputLockItem item : mDisplayInputLockItems) {
             item.mIsLockEnabled = mDisplayInputLockSetting.contains(
-                        getDisplayUniqueId(item.mDisplayId));
+                    getDisplayUniqueId(item.mDisplayId));
         }
 
         return true;
@@ -280,17 +283,17 @@ public final class DisplayInputLockTestFragment extends Fragment {
 
     private final ContentObserver mSettingObserver =
             new ContentObserver(new Handler(Looper.getMainLooper())) {
-        @Override
-        public void onChange(boolean selfChange, Uri uri) {
-            super.onChange(selfChange, uri);
-            if (isResumed()) {
-                if (DEBUG) {
-                    Log.d(TAG, "Content has changed for URI "  + uri);
+                @Override
+                public void onChange(boolean selfChange, Uri uri) {
+                    super.onChange(selfChange, uri);
+                    if (isResumed()) {
+                        if (DEBUG) {
+                            Log.d(TAG, "Content has changed for URI " + uri);
+                        }
+                        refreshDisplayInputLockList();
+                    }
                 }
-                refreshDisplayInputLockList();
-            }
-        }
-    };
+            };
 
     private void connectCar() {
         mCar = Car.createCar(getContext(), /* handler= */ null,

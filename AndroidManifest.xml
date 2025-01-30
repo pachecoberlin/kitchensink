@@ -260,6 +260,25 @@
         android:allowBackup="false"
         android:icon="@drawable/ic_launcher"
         android:debuggable="true">
+        <activity android:name=".SharingActivity"
+            android:label="@string/sharing_activity"
+            android:exported="true"
+            android:theme="@style/KitchenSinkActivityTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".SharingActivity2"
+            android:label="@string/sharing_activity"
+            android:exported="true"
+            android:theme="@style/SharingActivityTheme"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <uses-library android:name="android.test.runner"/>
         <!-- This is for embedded mode.
             showForAllUsers is required to be able to launch Kitchensink as system user for

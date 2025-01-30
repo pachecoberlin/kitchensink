@@ -59,4 +59,22 @@
         <item name="android:checkboxStyle">@style/CheckBoxStyle</item>
         <item name="android:spinnerStyle">@style/SpinnerStyle</item>
     </style>
+
+    <style name="SharingButtonStyle" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/button_background</item>
+        <item name="android:padding">16dp</item>
+<!--        <item name="android:paddingLeft">16dp</item>-->
+<!--        <item name="android:paddingRight">16dp</item>-->
+<!--        <item name="android:paddingBottom">16dp</item>-->
+<!--        <item name="android:paddingTop">16dp</item>-->
+    </style>
+
+    <style name="SharingActivityTheme" parent="Theme.AppCompat">
+        <item name="android:textSize">24sp</item>
+        <item name="android:buttonStyle">@style/SharingButtonStyle</item>
+        <item name="android:radioButtonStyle">@style/RadioButtonStyle</item>
+        <item name="android:checkboxStyle">@style/CheckBoxStyle</item>
+        <item name="android:spinnerStyle">@style/SpinnerStyle</item>
+        <item name="android:fontFamily">@font/bmw_type_next_pro</item>
+    </style>
 </resources>
