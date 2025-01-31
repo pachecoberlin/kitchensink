@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:text="@string/app_name"
-        android:textSize="20sp"
+        android:textAllCaps="true"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -83,10 +83,13 @@
 
         <Button
             android:id="@+id/cid"
-            android:layout_width="234dp"
+            android:layout_width="wrap_content"
             android:layout_height="141dp"
             android:gravity="bottom|center"
+            android:maxWidth="1000dp"
+            android:background="@drawable/display_button_border"
             android:text="@string/cid"
+            android:textColor="@color/grey"
             app:cornerRadius="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/padi"
@@ -95,10 +98,13 @@
 
         <Button
             android:id="@+id/padi"
-            android:layout_width="234dp"
+            android:layout_width="wrap_content"
             android:layout_height="141dp"
             android:gravity="bottom|center"
+            android:maxWidth="1000dp"
+            android:background="@drawable/display_button_border"
             android:text="@string/padi"
+            android:textColor="@color/grey"
             app:cornerRadius="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -107,8 +113,8 @@
 
         <ImageButton
             android:id="@+id/lock"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:src="@drawable/unlocked"
             app:layout_constraintStart_toStartOf="@+id/padi"
             app:layout_constraintTop_toTopOf="@+id/padi" />

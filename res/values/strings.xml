@@ -23,8 +23,8 @@
     <string name="recommend">Give Recommendation</string>
     <string name="touchable">open for input</string>
     <string name="untouchable">input locked</string>
-    <string name="cid">Central\nDisplay</string>
-    <string name="padi">Passenger\nDisplay</string>
+    <string name="cid">Central Display</string>
+    <string name="padi">Passenger Display</string>
     <string name="app_title" translatable="false">Kitchen Sink</string>
     <string name="toast_item_pinned_message" translatable="false">%s pinned.</string>
     <string name="toast_item_unpinned_message" translatable="false">%s unpinned.</string>

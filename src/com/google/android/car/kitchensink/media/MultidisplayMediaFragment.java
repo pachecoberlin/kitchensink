@@ -134,7 +134,7 @@ public final class MultidisplayMediaFragment extends Fragment {
         mUserManager = getContext().getSystemService(UserManager.class);
 
         View view = inflater.inflate(R.layout.multidisplay_media, container, false);
-        initUserSpinner(view);
+//        initUserSpinner(view);
 //        initVideoSpinner(view);
 
 //        mAllowDriverCheckBox = view.findViewById(R.id.allow_driver_checkbox);
