@@ -78,7 +78,7 @@
         <item name="android:radioButtonStyle">@style/RadioButtonStyle</item>
         <item name="android:checkboxStyle">@style/CheckBoxStyle</item>
         <item name="android:spinnerStyle">@style/SpinnerStyle</item>
-        <item name="android:fontFamily">@font/bmw_type_next_pro</item>
+        <item name="android:fontFamily">@font/type_next_pro</item>
         <item name="android:textColor">@color/white</item>
     </style>
 </resources>

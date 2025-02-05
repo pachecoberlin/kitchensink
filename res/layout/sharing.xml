@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sharing"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg"
@@ -153,10 +154,19 @@
         android:id="@+id/stopmirror"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="0dp"
-        android:paddingLeft="0dp"
         android:gravity="top"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
         android:text="@string/stop_mirror"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/surfaceView" />
+
+    <Button
+        android:id="@+id/bgswitcher"
+        android:layout_width="159dp"
+        android:layout_height="116dp"
+        android:background="@null"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

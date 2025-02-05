@@ -22,15 +22,13 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.ViewCompat;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
 
-//TODO knopf zum switchen der backgrounds
-//RelativeLayout layout = findViewById(R.id.your_layout_id);
-//layout.setBackgroundResource(R.drawable.background);
 public class SharingActivity2 extends Activity {
     private DisplayManager mDisplayManager;
     private DisplayLockHelper mDisplayLockHelper;
@@ -82,6 +80,7 @@ public class SharingActivity2 extends Activity {
         findViewById(R.id.sharelink).setOnClickListener(this::share);
         findViewById(R.id.locked).setOnClickListener(this::switchLock);
         findViewById(R.id.unlocked).setOnClickListener(this::switchLock);
+        findViewById(R.id.bgswitcher).setOnClickListener(this::switchBackground);
 
         ArrayList<Integer> displays = getDisplays();
         displays.remove((Object) this.getDisplayId());
@@ -89,6 +88,25 @@ public class SharingActivity2 extends Activity {
         mDisplayLockHelper = new DisplayLockHelper();
         mDisplayLockHelper.init(this, mOtherDisplayId);
         updateLockBtn();
+    }
+
+    int actualBackground = R.drawable.bg;
+
+    private void switchBackground(View view) {
+        ConstraintLayout layout = findViewById(R.id.sharing);
+        switch (actualBackground) {
+            case R.drawable.bg -> {
+                layout.setBackgroundResource(R.drawable.bgc);
+                actualBackground = R.drawable.bgc;
+                break;
+            }
+            case R.drawable.bgc -> {
+                layout.setBackgroundResource(R.drawable.bg);
+                actualBackground = R.drawable.bg;
+                break;
+            }
+            default -> layout.setBackgroundResource(R.drawable.bgc);
+        }
     }
 
     private void updateLockBtn() {
