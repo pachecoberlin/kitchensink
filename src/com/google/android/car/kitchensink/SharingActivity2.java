@@ -28,6 +28,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
 
+//TODO knopf zum switchen der backgrounds
+//RelativeLayout layout = findViewById(R.id.your_layout_id);
+//layout.setBackgroundResource(R.drawable.background);
 public class SharingActivity2 extends Activity {
     private DisplayManager mDisplayManager;
     private DisplayLockHelper mDisplayLockHelper;
@@ -54,18 +57,21 @@ public class SharingActivity2 extends Activity {
             controller.setSystemBarsBehavior(
                     WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE);
         }
-        ImageButton lock = findViewById(R.id.lock);
+        ImageButton lock = findViewById(R.id.locked);
+        ImageButton unlock = findViewById(R.id.unlocked);
         TextView touchable = findViewById(R.id.touchable);
         Button padi = findViewById(R.id.padi);
         // Set the Z-order
         ViewCompat.setTranslationZ(lock, 100); // lock will be in front of button
         lock.setZ(100);
+        ViewCompat.setTranslationZ(unlock, 100); // lock will be in front of button
+        unlock.setZ(100);
         ViewCompat.setTranslationZ(touchable, 100); // text will be in front of button
         touchable.setZ(100);
         ViewCompat.setTranslationZ(padi, -100);
         padi.setZ(-100);
 
-        mSurfaceView1 = findViewById(R.id.surface_view_);
+        mSurfaceView1 = findViewById(R.id.surfaceView);
         mSurfaceView1.setZOrderOnTop(true);  // SurfaceView should be placed over the App.
         mStopMirrorBtn = findViewById(R.id.stopmirror);
         mStopMirrorBtn.setEnabled(false);
@@ -74,22 +80,24 @@ public class SharingActivity2 extends Activity {
         findViewById(R.id.startmirror).setOnClickListener(this::startMirroring);
         findViewById(R.id.serve).setOnClickListener(this::serve);
         findViewById(R.id.sharelink).setOnClickListener(this::share);
-        findViewById(R.id.lock).setOnClickListener(this::switchLock);
+        findViewById(R.id.locked).setOnClickListener(this::switchLock);
+        findViewById(R.id.unlocked).setOnClickListener(this::switchLock);
 
         ArrayList<Integer> displays = getDisplays();
         displays.remove((Object) this.getDisplayId());
         mOtherDisplayId = displays.getFirst();
         mDisplayLockHelper = new DisplayLockHelper();
+        mDisplayLockHelper.init(this, mOtherDisplayId);
         updateLockBtn();
     }
 
     private void updateLockBtn() {
-        if (mDisplayLockHelper.init(this, mOtherDisplayId)) {
-            findViewById(R.id.lock).setBackgroundResource(R.drawable.locked);
-            ((TextView) findViewById(R.id.touchable)).setText(R.string.untouchable);
+        if (mDisplayLockHelper.isLocked(mOtherDisplayId)) {
+            findViewById(R.id.lockglow).setVisibility(View.VISIBLE);
+            findViewById(R.id.unlockglow).setVisibility(View.INVISIBLE);
         } else {
-            findViewById(R.id.lock).setBackgroundResource(R.drawable.unlocked);
-            ((TextView) findViewById(R.id.touchable)).setText(R.string.touchable);
+            findViewById(R.id.lockglow).setVisibility(View.INVISIBLE);
+            findViewById(R.id.unlockglow).setVisibility(View.VISIBLE);
         }
     }
 

@@ -35,13 +35,16 @@ public final class DisplayLockHelper {
         }
     }
 
-    public Boolean init(Context context, int displayId) {
+    public boolean init(Context context, int displayId) {
         mDisplayManager = context.getSystemService(DisplayManager.class);
         initDisplayInputLockData(context, displayId);
         return mDisplayInputLockSetting.contains(getDisplayUniqueId(displayId));
     }
+    public boolean isLocked(int displayId) {
+        return mDisplayInputLockSetting.contains(getDisplayUniqueId(displayId));
+    }
 
-    public Boolean switchLock(int displayId, Context context) {
+    public boolean switchLock(int displayId, Context context) {
         requestDisplayLock(displayId,
                 !mDisplayInputLockSetting.contains(getDisplayUniqueId(displayId)), context);
         return mDisplayInputLockSetting.contains(getDisplayUniqueId(displayId));

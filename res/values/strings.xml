@@ -14,15 +14,15 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="app_name">Sharing UseCases</string>
-    <string name="sharing_activity">Sharing UseCases</string>
+    <string name="app_name">Sharing Use Cases</string>
+    <string name="sharing_activity">Sharing Use Cases</string>
     <string name="description">Select Display and ...</string>
     <string name="start_mirror">Start Mirroring</string>
     <string name="stop_mirror">Stop Mirroring</string>
     <string name="serve">Start Serving</string>
     <string name="recommend">Give Recommendation</string>
-    <string name="touchable">open for input</string>
-    <string name="untouchable">input locked</string>
+    <string name="touchable">Input</string>
+    <string name="untouchable">Input</string>
     <string name="cid">Central Display</string>
     <string name="padi">Passenger Display</string>
     <string name="app_title" translatable="false">Kitchen Sink</string>
